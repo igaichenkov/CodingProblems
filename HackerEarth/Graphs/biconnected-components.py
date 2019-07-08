@@ -12,7 +12,7 @@ class Graph:
         self.__verticesCount = verticesCount
         self.__time = 0
 
-    def addEdge(self, fromVertext, toVertex):
+    def addEdge(self, fromVertex, toVertex):
         self.__edges[fromVertex].append(toVertex)
         self.__edges[toVertex].append(fromVertex)
 
