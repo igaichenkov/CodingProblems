@@ -84,7 +84,6 @@ graph = Graph(verticesCount)
 
 for i in range(edgesCount):
     fromVertex, toVertex = readIntArray()
-    test = "abc"
     graph.addEdge(fromVertex-1, toVertex-1)
 
 analysis = graph.analyseGraph()
