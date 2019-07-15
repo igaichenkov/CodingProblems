@@ -1,8 +1,5 @@
 def readIntArray():
-    res = []
-    for val in input().split():
-        res.append(int(val))
-    return res
+    return list(map(lambda x: int(x), input().split()))
 
 def readInt():
     return int(input())
