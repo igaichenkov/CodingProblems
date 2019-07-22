@@ -8,6 +8,8 @@ namespace DataStructures.Trees
 
          INode<TData> Right { get; }
 
+         INode<TData> Parent { get; }
+
         TData Data { get; }
     }
 }
