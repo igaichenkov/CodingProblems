@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace DataStructures.Tries
 {
     public class Trie
@@ -35,9 +37,45 @@ namespace DataStructures.Tries
             }
         }
 
-        public void Remove(string word)
+        public bool Remove(string word)
         {
+            TrieNode node = _root;
+            var traversalStack = new Stack<TrieNode>();
+            traversalStack.Push(_root);
 
+            for (int i = 0; i < word.Length; i++)
+            {
+                traversalStack.Push(node);
+
+                if (!node.Children.TryGetValue(word[i], out node))
+                {
+                    return false;
+                }
+            }
+
+            if (!node.IsEndOfWord)
+            {
+                return false;
+            }
+
+            int index = word.Length - 1;
+            while (traversalStack.Count > 0)
+            {
+                var nextNode = traversalStack.Pop();
+                if (node.Children.Count > 0)
+                {
+                    node.IsEndOfWord = false;
+                }
+                else
+                {
+                    nextNode.Children.Remove(word[index]);
+                }
+                
+                node = nextNode;
+                index--;
+            }
+
+            return true;
         }
 
         public bool Contains(string prefix, bool asWholeWord = false)

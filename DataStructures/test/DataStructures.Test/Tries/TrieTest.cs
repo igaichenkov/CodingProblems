@@ -23,5 +23,46 @@ namespace DataStructures.Test.Tries
             // Assert
             Assert.Equal(expectedResult, contains);
         }
+
+        [Fact]
+        public void Delete_ExisingWord_ReturnsTrue()
+        {
+            // Arrange
+            Trie trie = new Trie();
+            trie.Add("test");
+            trie.Add("testing");
+            trie.Add("abc");
+
+            // Act
+            bool isSuccessful = trie.Remove("test");
+
+            // Assert
+            Assert.True(isSuccessful);
+            Assert.True(trie.Contains("testing", true));
+            Assert.True(trie.Contains("abc", true));
+        }
+
+        [Theory]
+        [InlineData("tes")]
+        [InlineData("testi")]
+        [InlineData("a")]
+        [InlineData("bc")]
+        public void Delete_NonExisingWord_ReturnsFalse(string wordToDelete)
+        {
+            // Arrange
+            Trie trie = new Trie();
+            trie.Add("test");
+            trie.Add("testing");
+            trie.Add("abc");
+
+            // Act
+            bool isSuccessful = trie.Remove(wordToDelete);
+
+            // Assert
+            Assert.False(isSuccessful);
+            Assert.True(trie.Contains("testing", true));
+            Assert.True(trie.Contains("test", true));
+            Assert.True(trie.Contains("abc", true));
+        }
     }
 }
